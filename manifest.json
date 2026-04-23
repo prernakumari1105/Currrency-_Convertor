@@ -5,11 +5,11 @@
   "description": "Convert currencies easily with real-time exchange rates",
   "permissions": ["activeTab"],
   "host_permissions": [
-    "https://cdn.jsdelivr.net/*"
+    "https://cdn.jsdelivr.net/*",
+    "https://flagsapi.com/*"
   ],
   "action": {
     "default_popup": "currencyconvertor.html",
     "default_title": "Currency Converter"
   }
- 
 }
