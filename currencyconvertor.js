@@ -38,17 +38,35 @@ const updateExchangeRate = async()=>{
 
     try {
     const URL = `${BASE_URL}/${fromCurr.value.toLowerCase()}.json`;
+    console.log("Fetching from:", URL); // Debug log
+    console.log("From Currency:", fromCurr.value); // Debug log
+    console.log("To Currency:", toCurr.value); // Debug log
+    
     let response = await fetch(URL);
+    console.log("Response Status:", response.status); // Debug log
+    
     if (!response.ok) {
-      throw new Error("API response not OK");
+      console.error("Response status:", response.status, response.statusText);
+      throw new Error(`API response not OK: ${response.status}`);
     }
+    
     let data = await response.json();
+    console.log("API Data:", data); // Debug log
+    console.log("Exchange Rate Data:", data[fromCurr.value.toLowerCase()]); // Debug log
+    
     let rate =
       data[fromCurr.value.toLowerCase()][toCurr.value.toLowerCase()];
-      let finalAmount = amtVal * rate;
+    console.log("Conversion Rate:", rate); // Debug log
+    
+    let finalAmount = amtVal * rate;
+    console.log("Final Amount:", finalAmount); // Debug log
+    
     msg.innerText=` ${amtVal} ${fromCurr.value}=${finalAmount} ${toCurr.value}`
   } catch (err) {
-    console.error("Error:", err);
+    console.error("Full Error Details:", err);
+    console.error("Error Message:", err.message);
+    console.error("Error Stack:", err.stack);
+    msg.innerText = "Error fetching exchange rate. Please try again.";
   }
 }
 
@@ -68,5 +86,3 @@ btn.addEventListener("click",(evt)=>{
 window.addEventListener("load",()=>{
     updateExchangeRate();
 });
-
-
