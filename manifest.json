@@ -10,6 +10,6 @@
   "action": {
     "default_popup": "currencyconvertor.html",
     "default_title": "Currency Converter"
-  },
+  }
  
 }
